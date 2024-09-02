@@ -1,9 +1,11 @@
 <template>
   <div class="about">
-    <v-btn style="background-color: blue;
+    <v-btn style="background-color: blue;cursor: pointer;
     padding: 2rem;border-radius: 2px;" @click="onSubmit">SayHello</v-btn>
     <br/>
-    <h2></h2>
+   <div style="margin-top: 3rem;"> 
+    <h2 style="color: aliceblue;">{{ msg }}</h2>
+   </div>
   </div>
 </template>
 
@@ -17,8 +19,9 @@ const msg = ref('')
 const onSubmit = async() => {
   try{
     const response = await axios.get("http://localhost:8082/gethello")
-    msg = response.data
-    console.log(response.data)
+    if(response.status === 200){
+      msg.value = "Hello from backend!"
+    }
   }catch(err){
     console.log(err)
   }
