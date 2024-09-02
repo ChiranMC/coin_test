@@ -10,11 +10,15 @@
 
 <script setup> 
 import axios from 'axios';
+import { ref } from 'vue';
+
+const msg = ref('')
 
 const onSubmit = async() => {
   try{
-    const response = await axios.get("http://localhost:8085/api/proxy/hello")
-    
+    const response = await axios.get("http://localhost:8082/gethello")
+    msg = response.data
+    console.log(response.data)
   }catch(err){
     console.log(err)
   }
